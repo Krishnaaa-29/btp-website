@@ -1,8 +1,8 @@
 import coffee from "../assets/coffee-splash.png";
-
+import { Link } from "react-router-dom";
 const Home = () => {
   return (
-    <main className="bg-[#eeeff1] h-screen w-full">
+    <main className="bg-[#eeeff1] h-cover w-full">
       <header className="flex w-full max-w-screen-xl mx-auto items-center h-full">
         <div className="content flex-[1] flex flex-col gap-8">
           <h1 className="text-[100px] font-bold leading-none">
@@ -15,7 +15,9 @@ const Home = () => {
             single minute
           </p>
           <div className="buttons flex justify-center gap-8 ">
-            <button className="black-button shadow-md">ORDER NOW</button>
+            <button className="black-button shadow-md">
+              <Link to="/auth/login">ORDER NOW</Link>
+            </button>
             <button className="white-button shadow-md">BROWSE</button>
           </div>
         </div>

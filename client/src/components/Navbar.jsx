@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <nav className="min-h-[75px] bg-[#eeeff1] w-full flex items-center">
@@ -10,7 +12,9 @@ const Navbar = () => {
           <p>Cafe Menu</p>
           <p>Contact</p>
           <button>ORDER NOW</button>
-          <button className="black-button">SIGN IN</button>
+          <button className="black-button">
+            <Link to="/auth/register"> SIGN IN</Link>
+          </button>
         </div>
       </div>
     </nav>

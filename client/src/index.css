@@ -18,6 +18,10 @@
   --white: #ffffff;
 }
 
+.h-cover {
+  height: calc(100vh - 75px);
+}
+
 .black-button {
   background: var(--black);
   color: var(--white);
@@ -29,4 +33,9 @@
   color: var(--black);
   border-radius: 20px;
   padding: 8px 16px;
+}
+
+.cover-round {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
