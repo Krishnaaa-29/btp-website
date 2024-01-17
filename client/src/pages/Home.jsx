@@ -1,10 +1,11 @@
-import coffee from "../assets/coffee-splash.png";
+import coffeee from "../assets/coffee-splash.png";
 import { Link } from "react-router-dom";
 import { CoffeeCard } from "../components";
+import { coffee } from "../components/help.js";
 
 const Home = () => {
   const scroll = () => {
-    window.scrollTo(200, 0);
+    window.scrollTo(2000, 0);
   };
   return (
     <main className="bg-[#eeeff1] h-full w-full">
@@ -21,23 +22,23 @@ const Home = () => {
           </p>
           <div className="buttons flex justify-center gap-8 ">
             <button className="black-button shadow-md">
-              <button onClick={scroll}>ORDER NOW</button>
+              <a href="#card">ORDER NOW</a>
             </button>
             <button className="white-button shadow-md">BROWSE</button>
           </div>
         </div>
         <div className="image flex-[1]">
-          <img src={coffee} alt="coffee" />
+          <img src={coffeee} alt="coffee" />
         </div>
       </header>
       <section className="bg-white py-6">
         <h1 className="text-center font-bold text-3xl underline mb-4  ">
           Our Favourites
         </h1>
-        <div className="flex items-center justify-center gap-8">
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
+        <div className="flex items-center justify-center gap-8" id="card">
+          {coffee?.map((coff) => (
+            <CoffeeCard key={coff.id} name={coff.name} price={coff.Price} />
+          ))}
         </div>
       </section>
     </main>

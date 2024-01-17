@@ -3,6 +3,7 @@ import img from "../assets/login.jpg";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const Login = () => {
       localStorage.setItem("token", JSON.stringify(response.data.accessToken));
       localStorage.setItem("email", response.data.email);
       navigate("/");
+      toast.success("Login Successfully!");
     } catch (err) {
       console.log(err);
     }

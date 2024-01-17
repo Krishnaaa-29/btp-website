@@ -3,6 +3,7 @@ import img from "../assets/register.jpg";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const Register = () => {
         formData
       );
       navigate("/auth/login");
+      toast.success("Signed up Successfully!");
     } catch (err) {
       console.log(err);
     }
