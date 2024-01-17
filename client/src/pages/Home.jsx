@@ -1,6 +1,7 @@
 import coffee from "../assets/coffee-splash.png";
 import { Link } from "react-router-dom";
 import { CoffeeCard } from "../components";
+
 const Home = () => {
   return (
     <main className="bg-[#eeeff1] h-full w-full">
