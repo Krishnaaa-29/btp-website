@@ -1,9 +1,37 @@
+import { useState } from "react";
 import img from "../assets/register.jpg";
-import { InputBox } from "../components";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
+  const navigate = useNavigate()
+  const [formData, setFormData] = useState({
+    fullName:"",
+    email:"",
+    password:""
+  });
+  const {fullName, email, password} = formData;
+  const changeHandler = (event) => {
+    setFormData((prevData) => ({
+      ...prevData, 
+      [event.target.name] : event.target.value
+    }))
+  }
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    try{
+      await axios.post("http://localhost:3000/auth/register", formData)
+      navigate("/auth/login")
+    } catch(err){
+      console.log(err)
+    }
+    setFormData({
+      fullName:"",
+      email:"",
+      password:""
+    })
+  }
   return (
     <main className="bg-[#eeeff1] w-screen h-screen flex items-center justify-center">
       <div className="bg-white w-1/2 max-w-[640px] h-[500px] rounded-lg shadow-lg flex">
@@ -12,21 +40,27 @@ const Register = () => {
           alt="img"
           className="overflow-hidden object-cover cover-round flex-[1]"
         />
-        <form className="content relative flex-[1]">
+        <form className="content relative flex-[1]" onSubmit={submitHandler}>
           <h1 className="text-2xl font-bold text-center my-4">Register</h1>
-          <InputBox
+          <input
             name="fullName"
             type="text"
+            value={fullName}
+            onChange={changeHandler}
             placeholder="Enter your full name"
           />
-          <InputBox
+          <input
             name="email"
             type="email"
+            value={email}
+            onChange={changeHandler}
             placeholder="Enter your Email ID"
           />
-          <InputBox
+          <input
             name="password"
             type="password"
+            value={password}
+            onChange={changeHandler}
             placeholder="Enter your Password"
           />
           <button className="black-button block mx-auto my-8" type="submit">
