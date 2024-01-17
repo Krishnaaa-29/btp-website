@@ -1,23 +1,41 @@
 import bcrypt from "bcrypt";
 import User from "../models/userModel.js";
 import jwt from "jsonwebtoken";
+import orderModel from "../models/orderModel.js";
+
+const createToken = (user) => {
+  const token = jwt.sign(
+    {
+      id: user._id,
+      email: user.email,
+    },
+    process.env.ACCESS_TOKEN,
+    { expiresIn: "15m" }
+  );
+
+  return token;
+};
+
+const order = async (req, res) => {
+  try {
+    const { name, price, description, email } = req.body;
+    if (!name || !price || !description || !email) {
+      return res.status(403).json({ error: "All fields must be filled" });
+    }
+    const orderDetails = await orderModel.create({name, price, description, orderedBy:email})
+    if (orderDetails) {
+      return res.status(201).json({ _id: orderDetails.id, name: orderDetails.name, price: orderDetails.price, description: orderDetails.description, email: orderDetails.email });
+    } else {
+      return res.status(400).json({ error: "Something went wrong" });
+    }
+  } catch (error) {
+    return res.status(500).json({ error: error });
+  }
+};
 
 const registerUser = async (req, res) => {
   const emailRegex =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-  const createToken = (user) => {
-    const token = jwt.sign(
-      {
-        id: user._id,
-        email: user.email,
-      },
-      process.env.ACCESS_TOKEN,
-      { expiresIn: "15m" }
-    );
-
-    return token;
-  };
 
   try {
     const { fullName, email, password } = req.body;
@@ -69,7 +87,7 @@ const login = async (req, res) => {
 
     if (await bcrypt.compare(password, user.password)) {
       const accessToken = createToken(user);
-      return res.status(200).json({ msg: "Login Successful", accessToken });
+      return res.status(200).json({ msg: "Login Successful", accessToken , email});
     } else {
       return res.status(403).json({ error: "Password doesn't match" });
     }
@@ -78,4 +96,4 @@ const login = async (req, res) => {
   }
 };
 
-export { registerUser, login };
+export { registerUser, login, order };
