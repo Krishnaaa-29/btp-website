@@ -5,33 +5,36 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Register = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    fullName:"",
-    email:"",
-    password:""
+    fullName: "",
+    email: "",
+    password: "",
   });
-  const {fullName, email, password} = formData;
+  const { fullName, email, password } = formData;
   const changeHandler = (event) => {
     setFormData((prevData) => ({
-      ...prevData, 
-      [event.target.name] : event.target.value
-    }))
-  }
+      ...prevData,
+      [event.target.name]: event.target.value,
+    }));
+  };
   const submitHandler = async (event) => {
     event.preventDefault();
-    try{
-      await axios.post("http://localhost:3000/auth/register", formData)
-      navigate("/auth/login")
-    } catch(err){
-      console.log(err)
+    try {
+      await axios.post(
+        "https://btp-website.onrender.com/auth/register",
+        formData
+      );
+      navigate("/auth/login");
+    } catch (err) {
+      console.log(err);
     }
     setFormData({
-      fullName:"",
-      email:"",
-      password:""
-    })
-  }
+      fullName: "",
+      email: "",
+      password: "",
+    });
+  };
   return (
     <main className="bg-[#eeeff1] w-screen h-screen flex items-center justify-center">
       <div className="bg-white w-1/2 max-w-[640px] h-[500px] rounded-lg shadow-lg flex">

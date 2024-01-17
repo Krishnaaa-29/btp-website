@@ -5,35 +5,38 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    fullName:"",
-    email:"",
-    password:""
+    fullName: "",
+    email: "",
+    password: "",
   });
-  const {email, password} = formData;
+  const { email, password } = formData;
   const changeHandler = (event) => {
     setFormData((prevData) => ({
-      ...prevData, 
-      [event.target.name] : event.target.value
-    }))
-  }
+      ...prevData,
+      [event.target.name]: event.target.value,
+    }));
+  };
   const submitHandler = async (event) => {
     event.preventDefault();
-    try{
-      const response = await axios.post("http://localhost:3000/auth/login", formData)
-      localStorage.setItem("token", JSON.stringify(response.data.accessToken))
-      localStorage.setItem("email", response.data.email)
-      navigate("/")
-    } catch(err){
-      console.log(err)
+    try {
+      const response = await axios.post(
+        "https://btp-website.onrender.com/auth/login",
+        formData
+      );
+      localStorage.setItem("token", JSON.stringify(response.data.accessToken));
+      localStorage.setItem("email", response.data.email);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
     }
     setFormData({
-      fullName:"",
-      email:"",
-      password:""
-    })
-  }
+      fullName: "",
+      email: "",
+      password: "",
+    });
+  };
   return (
     <div>
       <main className="bg-[#eeeff1] w-screen h-screen flex items-center justify-center">

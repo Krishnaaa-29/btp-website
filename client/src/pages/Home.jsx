@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { CoffeeCard } from "../components";
 
 const Home = () => {
+  const scroll = () => {
+    window.scrollTo(200, 0);
+  };
   return (
     <main className="bg-[#eeeff1] h-full w-full">
       <header className="flex w-full max-w-screen-xl mx-auto items-center h-full">
@@ -18,7 +21,7 @@ const Home = () => {
           </p>
           <div className="buttons flex justify-center gap-8 ">
             <button className="black-button shadow-md">
-              <Link to="/auth/login">ORDER NOW</Link>
+              <button onClick={scroll}>ORDER NOW</button>
             </button>
             <button className="white-button shadow-md">BROWSE</button>
           </div>
