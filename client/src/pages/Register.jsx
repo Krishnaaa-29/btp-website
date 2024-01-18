@@ -4,6 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { InputBox } from "../components";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -47,25 +48,26 @@ const Register = () => {
         />
         <form className="content relative flex-[1]" onSubmit={submitHandler}>
           <h1 className="text-2xl font-bold text-center my-4">Register</h1>
-          <input
+
+          <InputBox
             name="fullName"
             type="text"
             value={fullName}
-            onChange={changeHandler}
+            changeHandler={changeHandler}
             placeholder="Enter your full name"
           />
-          <input
+          <InputBox
             name="email"
             type="email"
             value={email}
-            onChange={changeHandler}
+            changeHandler={changeHandler}
             placeholder="Enter your Email ID"
           />
-          <input
+          <InputBox
             name="password"
             type="password"
             value={password}
-            onChange={changeHandler}
+            changeHandler={changeHandler}
             placeholder="Enter your Password"
           />
           <button className="black-button block mx-auto my-8" type="submit">

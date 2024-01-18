@@ -1,6 +1,6 @@
 import axios from "axios";
 import cappucino from "../assets/cappucino.jpg";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 const CoffeeCard = ({ name, price }) => {
   const formData = {
